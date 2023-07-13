@@ -127,6 +127,7 @@ const sortedData = productlist.sort((a, b) => a - b);
 
 
 
+
       <View style={{backgroundColor:'white', width:'95%', alignSelf:'center', borderRadius:13, height:110, flexDirection:'column', paddingTop:18, paddingBottom:18}}>
 
 <View style={{flexDirection:'row', justifyContent:'space-between'}}>
