@@ -15,7 +15,7 @@ import {
 } from 'react-native';
 // import {  TextInput} from 'react-native-paper';
 // import { TextInput } from 'react-native-material-ui';
-const AddBills = ({ navigation }) => {
+const Home = ({ navigation }) => {
  
     const [isChecked, setChecked] = useState(false);
   
@@ -116,28 +116,133 @@ const sortedData = productlist.sort((a, b) => a - b);
         {/* <Text>Ali</Text> */}
       </View>
 
-<View style={{flexDirection:'column'}}>
+<View style={{flexDirection:'column',}}>
     <Text style={{color:'black', fontSize:18, marginLeft:12,}}>Esperanza Owner</Text>
     <Text style={{color:'blue', fontSize:10, marginLeft:12}}>Ibrahim Sheikh</Text>
 </View>
 
       </View>
 
+      <View style={{backgroundColor:'white', width:'95%', alignSelf:'center', borderRadius:13, height:110, flexDirection:'column', paddingTop:12, paddingBottom:18, marginBottom:20}}>
+
+<View style={{flexDirection:'row',}}>
+    <Text style={{color:'black', fontSize:15,fontWeight:'bold',marginLeft:12,marginBottom:12}}> Orders</Text>
+
+    {/* <Image source={require("../Images/arrow.png")} style={{height:32, width:32,alignSelf:'center',marginTop:0}}/> */}
+
+</View>
+<View style={{flexDirection:'row',justifyContent:'space-evenly',alignItems:'center'}}>
+<View style={{flexDirection:'column', alignItems:'center'}}>
+     <Text style={{color:'#18A6DA'}}>1000</Text>
+    <TouchableOpacity>
+     <Text style={{color:'blue'}}>Pending</Text>
+     </TouchableOpacity>
+     </View>
+
+    
+     <View style={{flexDirection:'column', alignItems:'center'}}>
+     <Text style={{color:'#18A6DA'}}>1000</Text>
+     <TouchableOpacity>
+     <Text style={{color:'blue'}}>To Ship</Text>
+     </TouchableOpacity>
+     </View>
+   
+
+     <View style={{flexDirection:'column', alignItems:'center', justifyContent:'center'}}>
+     <Text style={{color:'#18A6DA'}}>1000</Text>
+     <TouchableOpacity>
+     <Text style={{color:'blue'}}>Shipped</Text>
+     </TouchableOpacity>
+     </View>
+    
+     <View style={{flexDirection:'column', alignItems:'center', }}>
+     <Text style={{color:'#18A6DA'}}>0</Text>
+     <TouchableOpacity>
+     <Text style={{color:'blue'}}>Returned</Text>
+     </TouchableOpacity>
+     </View>
+     </View>
 
 
 
 
 
-      <View style={{backgroundColor:'white', width:'95%', alignSelf:'center', borderRadius:13, height:110, flexDirection:'column', paddingTop:18, paddingBottom:18}}>
 
-<View style={{flexDirection:'row', justifyContent:'space-between'}}>
+
+
+
+
+
+</View>
+
+
+
+
+
+
+
+
+
+
+<View style={{backgroundColor:'white', width:'95%', alignSelf:'center', borderRadius:13, height:170, flexDirection:'column', paddingTop:12, paddingBottom:18, marginBottom:20}}>
+
+<View style={{flexDirection:'row',}}>
+    <Text style={{color:'black', fontSize:15,fontWeight:'bold',marginLeft:12,marginBottom:12}}> Products</Text>
+
+    {/* <Image source={require("../Images/arrow.png")} style={{height:32, width:32,alignSelf:'center',marginTop:0}}/> */}
+
+</View>
+<TouchableOpacity style={{height:50,backgroundColor: '#fbeee8', width:'90%' ,alignSelf:'center', borderWidth:2,borderColor:'#ff5400',alignItems:'center',marginBottom:12,justifyContent:'center', borderRadius:10, borderStyle:'dotted', flexDirection:'row'}}>
+<Text style={{color:'#ff5400', fontSize:16, fontWeight:'bold'}}>+   </Text>
+<Text style={{color:'#ff5400', fontSize:16}}>Add Product</Text>
+</TouchableOpacity>
+
+<View style={{flexDirection:'row',justifyContent:'space-evenly'}}>
+<View style={{flexDirection:'column', alignItems:'center'}}>
+     <Text style={{color:'#18A6DA'}}>1000</Text>
+     <Text style={{color:'gray'}}>Shawls</Text>
+     </View>
+
+     <View style={{backgroundColor:'gray', height:30, width:1, alignSelf:"center", marginLeft:12, marginRight:12}}></View>
+     <View style={{flexDirection:'column', marginLeft:12, alignItems:'center'}}>
+     <Text style={{color:'#18A6DA'}}>1000</Text>
+     <Text style={{color:'gray'}}>Stollers</Text>
+     </View>
+   
+     <View style={{backgroundColor:'gray', height:30, width:1, alignSelf:"center", marginLeft:12, marginRight:12}}></View>
+     <View style={{flexDirection:'column', marginLeft:12, alignItems:'center'}}>
+     <Text style={{color:'#18A6DA'}}>1000</Text>
+     <Text style={{color:'gray'}}>Duppata</Text>
+     </View>
+     <View style={{backgroundColor:'gray', height:30, width:1, alignSelf:"center", marginLeft:12, marginRight:12}}></View>
+     <View style={{flexDirection:'column', marginLeft:12, alignItems:'center'}}>
+     <Text style={{color:'#18A6DA'}}>April</Text>
+     <Text style={{color:'gray'}}>Abaya</Text>
+     </View>
+     </View>
+
+
+
+
+
+
+
+
+
+
+
+</View>
+
+      <View style={{backgroundColor:'white', width:'95%', alignSelf:'center', borderRadius:13, height:110, flexDirection:'column', paddingTop:12, paddingBottom:18}}>
+
+<View style={{flexDirection:'row', justifyContent:'space-between', }}>
     <Text style={{color:'black', fontSize:15,fontWeight:'bold',marginLeft:12,marginTop:0}}> Store Performance</Text>
 
     <Image source={require("../Images/arrow.png")} style={{height:32, width:32,alignSelf:'center',marginTop:0}}/>
 
 </View>
-<View style={{flexDirection:'row',}}>
-<View style={{flexDirection:'column', marginLeft:12, alignItems:'center'}}>
+<View style={{flexDirection:'row',justifyContent:'space-evenly'}}>
+<View style={{flexDirection:'column', alignItems:'center'}}>
      <Text style={{color:'#18A6DA'}}>1000</Text>
      <Text style={{color:'gray'}}>Total Sales</Text>
      </View>
@@ -191,7 +296,7 @@ const sortedData = productlist.sort((a, b) => a - b);
   );
 };
 
-export default AddBills;
+export default Home;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
