@@ -10,6 +10,7 @@ import Second from './Screens/Second';
 import First from './Screens/First';
 import Home from './Screens/Home';
 import Login from './Screens/Login';
+import AddProducts from './Screens/AddProducts';
 // import AddBills from './Screens/AddBills';
 const Stack = createNativeStackNavigator();
 // const Drawer = createDrawerNavigator();
@@ -28,7 +29,7 @@ function App() {
         <Stack.Screen name="Second" component={Second} />
         <Stack.Screen name="Login" component={Login} />
          <Stack.Screen name="Home" component={Home} />
-        {/* <Stack.Screen name="AddBills" component={AddBills} />  */}
+        <Stack.Screen name="AddProducts" component={AddProducts} /> 
         {/* <Stack.Screen name="CustomDrawer" component={CustomDrawer} /> */}
       </Stack.Navigator>
      

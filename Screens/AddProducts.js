@@ -4,10 +4,13 @@ import iconFont from 'react-native-vector-icons/Fonts/FontAwesome.ttf';
 import FontAwesomeIcon from 'react-native-vector-icons/FontAwesome';
 // import Icon from 'react-native-vector-icons/FontAwesome';
 // import {settings-applications} from 'react-native-vector-icons/MaterialIcons';
-
+import MultipleImagePicker from '@baronha/react-native-multiple-image-picker';
+import ImagePicker from 'react-native-image-crop-picker';
 import Modal from "react-native-modal";
 // import {fa-regular fa-house-blank} from 'react-native-vector-icons/FontAwesome';
 import Icon from 'react-native-vector-icons/MaterialIcons';
+import ImageGrid from '@baronha/react-native-image-grid';
+import Carousel from 'react-native-snap-carousel';
 import {
   View,
   Text,
@@ -18,10 +21,44 @@ import {
   Image,                                  
   ImageBackground,
 } from 'react-native';
-import AddProducts from './AddProducts';
+import { openPicker } from '@baronha/react-native-multiple-image-picker';
 // import {  TextInput} from 'react-native-paper';
 // import { TextInput } from 'react-native-material-ui';
-const Home = ({ navigation }) => {
+const AddProducts = ({ navigation }) => {
+
+  //   const [images, setImages] = useState([]);
+
+  // const onPressImage = (item, index) => {
+  //   console.log(item, index);
+  
+  // };
+
+  // const onPicker = async () => {
+  //   try {
+  //     const singleSelectedMode = false;
+
+  //     const response = await openPicker({
+  //       selectedAssets: images,
+  //       isExportThumbnail: true,
+  //       // maxVideo: 1,
+  //       doneTitle: 'Done',
+  //       singleSelectedMode,
+  //       isCrop: true,
+  //     });
+
+  //     const crop = response.crop;
+
+  //     if (crop) {
+  //       response.path = crop.path;
+  //       response.width = crop.width;
+  //       response.height = crop.height;
+  //     }
+
+  //     setImages(response);
+  //     console.log(images)
+  //   } catch (e) {}
+  // };
+
   const iconFontStyles = `@font-face {
     src: url(${iconFont});
     font-family: FontAwesome;
@@ -143,6 +180,40 @@ alert("Fill the details")
 const sortedData = productlist.sort((a, b) => a - b);
 
 
+
+
+const[Images,setImages] =useState([]);
+
+const openImagePicker = () =>{
+  let ImageList =[];
+  ImagePicker.openPicker({
+    multiple: true,
+    waitAnimationEnd :false,
+    includeExif:true,
+    forceJpg:true,
+    compressImageQuality: 0.8,
+    maxFiles: 5,
+    mediaType: 'any',
+    includeBase64:true,
+  })
+  .then (response =>{
+    console.log('Response:' ,response);
+  })
+};
+const _renderItem =({item,index})=>{
+  return(
+<View style={styles.slide} key={index}>
+<Text style={styles.title}>{ item.title }</Text>
+
+<Image style={{width:'88%', borderRadius:15,height:200}} source={{uri: item.path}}/>
+<View style={{marginTop:10, flexDirection:'row', alignItems:"center"}}></View>
+</View>
+
+
+  )
+}
+
+
   return (
     <View style={{ backgroundColor:'#333333', height:'100%', position:'absolute', width:'100%'}}>
          <Modal
@@ -244,76 +315,42 @@ const sortedData = productlist.sort((a, b) => a - b);
 
 <Image source={require("../Images/drawer.png")} style={{height:'40%', width:'30%'}}/>
 </TouchableOpacity>
-     
-     
-     
-     
-     
-     
-     
-     
-      </View>
-
-  <ScrollView style={{height:'100%'}}> 
-      <View style={{backgroundColor:'white', width:'90%', alignSelf:'center', borderRadius:13, height:60, flexDirection:'row', padding:12, marginBottom:20}}>
-
-        <View style={{alignItems:"center", justifyContent:"center"}}>
-<View style={{width:49,height:49, borderRadius:40, backgroundColor:'gray', alignSelf:"center", alignItems:'baseline' , justifyContent:'flex-end' }}>
-<View style={{width:19,height:19, borderRadius:20, backgroundColor:'red', alignSelf:"flex-end", }}>
-
-
-</View>
-</View>
-
-        {/* <Text>Ali</Text> */}
-      </View>
-
-<View style={{flexDirection:'column',}}>
-    <Text style={{color:'black', fontSize:18, marginLeft:12,}}>Esperanza Owner</Text>
-    <Text style={{color:'blue', fontSize:10, marginLeft:12}}>Ibrahim Sheikh</Text>
-</View>
-
-      </View>
-
-      <View style={{backgroundColor:'white', width:'95%', alignSelf:'center', borderRadius:13, height:110, flexDirection:'column', paddingTop:12, paddingBottom:18, marginBottom:20}}>
-
-<View style={{flexDirection:'row',}}>
-    <Text style={{color:'black', fontSize:15,fontWeight:'bold',marginLeft:12,marginBottom:12}}> Orders</Text>
-
-    {/* <Image source={require("../Images/arrow.png")} style={{height:32, width:32,alignSelf:'center',marginTop:0}}/> */}
-
-</View>
-<View style={{flexDirection:'row',justifyContent:'space-evenly',alignItems:'center'}}>
-<View style={{flexDirection:'column', alignItems:'center'}}>
-     <Text style={{color:'#18A6DA'}}>1000</Text>
-    <TouchableOpacity>
-     <Text style={{color:'blue'}}>Pending</Text>
-     </TouchableOpacity>
-     </View>
-
     
-     <View style={{flexDirection:'column', alignItems:'center'}}>
-     <Text style={{color:'#18A6DA'}}>1000</Text>
-     <TouchableOpacity>
-     <Text style={{color:'blue'}}>To Ship</Text>
-     </TouchableOpacity>
-     </View>
-   
-
-     <View style={{flexDirection:'column', alignItems:'center', justifyContent:'center'}}>
-     <Text style={{color:'#18A6DA'}}>1000</Text>
-     <TouchableOpacity>
-     <Text style={{color:'blue'}}>Shipped</Text>
-     </TouchableOpacity>
-     </View>
+      </View>
     
-     <View style={{flexDirection:'column', alignItems:'center', }}>
-     <Text style={{color:'#18A6DA'}}>0</Text>
-     <TouchableOpacity>
-     <Text style={{color:'blue'}}>Returned</Text>
-     </TouchableOpacity>
-     </View>
-     </View>
+
+      {/* <ScrollView
+       style={{height:"10%"}}>
+        <View style={{ height:140 }}>
+          <Image
+          source={images} style={{height:'70%', width:'70%'}} */}
+            {/* // dataImage={Array.isArray(images) ? images : [images]}
+            // onPressImage={onPressImage}
+            // containerStyle={{}}
+            // spaceSize={10}
+            // containerStyle={{justifyContent:'flexstart'}}
+            // width={Dimensions.get("window").width-10}
+            // height = {Dimensions.get("window").height-1000}
+            // sourceKey={'path'}
+            // videoKey={'type'}
+            // imagekey= {'type'}
+            // imageURLKey ={'thumbnail'}
+            // prefixPath={'file://'}
+            // conditionCheckVideo={'video'}
+            // videoURLKey={'thumbnail'}
+          /> */}
+          {/* <Text>{item}</Text>
+          <Text>{index}</Text> */}
+        
+        {/* </View>
+       
+    
+      </ScrollView> */}
+
+
+      <TouchableOpacity style={{}} onPress={openImagePicker}>
+            <Text style={{color:"red"}}>Open Picker</Text>
+          </TouchableOpacity>
 
 
 
@@ -325,124 +362,16 @@ const sortedData = productlist.sort((a, b) => a - b);
 
 
 
-</View>
-
-
-
-
-
-
-
-
-
-
-<View style={{backgroundColor:'white', width:'95%', alignSelf:'center', borderRadius:13, height:170, flexDirection:'column', paddingTop:12, paddingBottom:18, marginBottom:20}}>
-
-<View style={{flexDirection:'row',}}>
-    <Text style={{color:'black', fontSize:15,fontWeight:'bold',marginLeft:12,marginBottom:12}}> Products</Text>
-
-    {/* <Image source={require("../Images/arrow.png")} style={{height:32, width:32,alignSelf:'center',marginTop:0}}/> */}
-
-</View>
-<TouchableOpacity style={{height:50,backgroundColor: '#fbeee8', width:'90%' ,alignSelf:'center', borderWidth:2,borderColor:'#ff5400',alignItems:'center',marginBottom:12,justifyContent:'center', borderRadius:10, borderStyle:'dotted', flexDirection:'row'}}
-   onPress={() => navigation.navigate('AddProducts')}>
-<Text style={{color:'#ff5400', fontSize:16, fontWeight:'bold'}}>+   </Text>
-<Text style={{color:'#ff5400', fontSize:16}}>Add Product</Text>
-</TouchableOpacity>
-
-<View style={{flexDirection:'row',justifyContent:'space-evenly'}}>
-<View style={{flexDirection:'column', alignItems:'center'}}>
-     <Text style={{color:'#18A6DA'}}>1000</Text>
-     <Text style={{color:'gray'}}>Shawls</Text>
-     </View>
-
-     <View style={{backgroundColor:'gray', height:30, width:1, alignSelf:"center", marginLeft:12, marginRight:12}}></View>
-     <View style={{flexDirection:'column', marginLeft:12, alignItems:'center'}}>
-     <Text style={{color:'#18A6DA'}}>1000</Text>
-     <Text style={{color:'gray'}}>Stollers</Text>
-     </View>
-   
-     <View style={{backgroundColor:'gray', height:30, width:1, alignSelf:"center", marginLeft:12, marginRight:12}}></View>
-     <View style={{flexDirection:'column', marginLeft:12, alignItems:'center'}}>
-     <Text style={{color:'#18A6DA'}}>1000</Text>
-     <Text style={{color:'gray'}}>Duppata</Text>
-     </View>
-     <View style={{backgroundColor:'gray', height:30, width:1, alignSelf:"center", marginLeft:12, marginRight:12}}></View>
-     <View style={{flexDirection:'column', marginLeft:12, alignItems:'center'}}>
-     <Text style={{color:'#18A6DA'}}>April</Text>
-     <Text style={{color:'gray'}}>Abaya</Text>
-     </View>
-     </View>
-
-
-
-
-
-
-
-
-
-
-
-</View>
-
-      <View style={{backgroundColor:'white', width:'95%', alignSelf:'center', borderRadius:13, height:110, flexDirection:'column', paddingTop:12, paddingBottom:18}}>
-
-<View style={{flexDirection:'row', justifyContent:'space-between', }}>
-    <Text style={{color:'black', fontSize:15,fontWeight:'bold',marginLeft:12,marginTop:0}}> Store Performance</Text>
-
-    <Image source={require("../Images/arrow.png")} style={{height:32, width:32,alignSelf:'center',marginTop:0}}/>
-
-</View>
-<View style={{flexDirection:'row',justifyContent:'space-evenly'}}>
-<View style={{flexDirection:'column', alignItems:'center'}}>
-     <Text style={{color:'#18A6DA'}}>1000</Text>
-     <Text style={{color:'gray'}}>Total Sales</Text>
-     </View>
-
-     <View style={{backgroundColor:'gray', height:30, width:1, alignSelf:"center", marginLeft:12, marginRight:12}}></View>
-     <View style={{flexDirection:'column', marginLeft:12, alignItems:'center'}}>
-     <Text style={{color:'#18A6DA'}}>1000</Text>
-     <Text style={{color:'gray'}}>Revenue</Text>
-     </View>
-   
-     <View style={{backgroundColor:'gray', height:30, width:1, alignSelf:"center", marginLeft:12, marginRight:12}}></View>
-     <View style={{flexDirection:'column', marginLeft:12, alignItems:'center'}}>
-     <Text style={{color:'#18A6DA'}}>1000</Text>
-     <Text style={{color:'gray'}}>Profit</Text>
-     </View>
-     <View style={{backgroundColor:'gray', height:30, width:1, alignSelf:"center", marginLeft:12, marginRight:12}}></View>
-     <View style={{flexDirection:'column', marginLeft:12, alignItems:'center'}}>
-     <Text style={{color:'#18A6DA'}}>April</Text>
-     <Text style={{color:'gray'}}>Month</Text>
-     </View>
-     </View>
-
-
-
-
-
-
-
-
-
-
-
-</View>
-
-
-
-</ScrollView>
 <View style={{ height:60, width:'99%', backgroundColor:'white' ,alignSelf:'center', justifyContent:'center', borderTopStartRadius:30, borderTopEndRadius:30}}> 
 <View style={{flexDirection:'row', justifyContent:'space-around'}}>
 
-  <TouchableOpacity style={styles.bottom}>
-<Icon name="home" color="#ff5400"  size={30} light/>
-<Text style={{color:'#ff5400'}}>Home</Text>
+  <TouchableOpacity style={styles.bottom}   onPress={() => navigation.replace('Home')}>
+<Icon name="home" color="grey"  size={30} light/>
+<Text style={{color:'grey'}}>Home</Text>
 </TouchableOpacity>
-<TouchableOpacity style={styles.bottom}     onPress={() => navigation.replace('AddProducts')}>
-<Icon name="shopping-bag" color="grey"  size={30} light/>
-<Text style={{color:'grey'}}>Add Products</Text>
+<TouchableOpacity style={styles.bottom}>
+<Icon name="shopping-bag" color="#ff5400"  size={30} light/>
+<Text style={{color:'#ff5400'}}>Add Products</Text>
 </TouchableOpacity>
 <TouchableOpacity style={styles.bottom}>
 <Icon name="settings" color="grey"  size={30} light/>
@@ -467,7 +396,7 @@ const sortedData = productlist.sort((a, b) => a - b);
   );
 };
 
-export default Home;
+export default AddProducts;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
